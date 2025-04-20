@@ -1,0 +1,114 @@
+openapi: 3.1.0
+info:
+  title: Calculator API
+  description: A simple calculator API with add and subtract operations
+  version: 1.0.0
+  contact:
+    name: API Support
+servers:
+  - url: http://localhost:3000
+    description: Local development server
+paths:
+  /api/calculate/add:
+    post:
+      summary: Add two numbers
+      description: Takes two numbers and returns their sum
+      operationId: addNumbers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculatorInput'
+      responses:
+        '200':
+          description: Successful calculation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatorResponse'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /api/calculate/subtract:
+    post:
+      summary: Subtract two numbers
+      description: Takes two numbers and returns their difference
+      operationId: subtractNumbers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CalculatorInput'
+      responses:
+        '200':
+          description: Successful calculation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CalculatorResponse'
+        '400':
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    CalculatorInput:
+      type: object
+      required:
+        - num1
+        - num2
+      properties:
+        num1:
+          type: number
+          description: First operand
+          example: 10
+        num2:
+          type: number
+          description: Second operand
+          example: 5
+    CalculatorResponse:
+      type: object
+      properties:
+        result:
+          type: number
+          description: Result of the calculation
+          example: 15
+        operation:
+          type: string
+          description: Operation performed
+          example: add
+        input:
+          type: object
+          properties:
+            num1:
+              type: number
+              example: 10
+            num2:
+              type: number
+              example: 5
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: Both num1 and num2 are required 

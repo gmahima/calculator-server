@@ -6,6 +6,8 @@ info:
   contact:
     name: API Support
 servers:
+  - url: https://calculator-server-l9ij.onrender.com
+    description: Production server
   - url: http://localhost:3000
     description: Local development server
 paths:
